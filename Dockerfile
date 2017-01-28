@@ -3,8 +3,6 @@ MAINTAINER Anorlondo448 <@Anorlondo448>
 
 ENV ELASTIC_VERSION=5.1.2
 ENV ES_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch
-
-
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 
