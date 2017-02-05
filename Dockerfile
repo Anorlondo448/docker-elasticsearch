@@ -44,7 +44,7 @@ COPY elasticsearch.yml config/
 COPY log4j2.properties config/
 COPY bin/es-docker bin/es-docker
 
-#USER root
+USER root
 RUN chown elasticsearch:elasticsearch config/elasticsearch.yml config/log4j2.properties bin/es-docker && \
     chmod 0750 bin/es-docker
 
