@@ -5,8 +5,9 @@ ENV ELASTIC_VERSION=5.1.2
 ENV ES_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
+ENV ES_HOME /usr/share/elasticsearch
 
-WORKDIR /usr/share/elasticsearch
+WORKDIR ${ES_HOME}
 
 # Download/extract defined ES version. busybox tar can't strip leading dir.
 RUN wget ${ES_DOWNLOAD_URL}/elasticsearch-${ELASTIC_VERSION}.tar.gz && \
@@ -40,15 +41,17 @@ RUN elasticsearch-plugin install analysis-smartcn
 # install phonetic
 RUN elasticsearch-plugin install analysis-phonetic
 
-COPY elasticsearch.yml config/
-COPY log4j2.properties config/
-COPY bin/es-docker bin/es-docker
+COPY elasticsearch.yml ${ES_HOME}/config/
+COPY log4j2.properties ${ES_HOME}/config/
+COPY bin/es-docker ${ES_HOME}/bin/es-docker
 
 USER root
-RUN chown elasticsearch:elasticsearch config/elasticsearch.yml config/log4j2.properties bin/es-docker && \
-    chmod 0750 bin/es-docker
+RUN chown elasticsearch:elasticsearch ${ES_HOME}/config/elasticsearch.yml \
+                                      ${ES_HOME}/config/log4j2.properties \
+                                      ${ES_HOME}/bin/es-docker && \
+    chmod 0750 ${ES_HOME}/bin/es-docker
 
 USER elasticsearch
-CMD ["/bin/bash", "bin/es-docker"]
+CMD ["/bin/bash", "${ES_HOME}/bin/es-docker"]
 
 EXPOSE 9200 9300
