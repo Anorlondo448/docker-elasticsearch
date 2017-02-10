@@ -4,7 +4,7 @@ MAINTAINER Anorlondo448 <@Anorlondo448>
 ENV ELASTIC_VERSION=5.1.2
 ENV ES_DOWNLOAD_URL=https://artifacts.elastic.co/downloads/elasticsearch
 ENV PATH /usr/share/elasticsearch/bin:$PATH
-ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
+
 ENV ES_HOME /usr/share/elasticsearch
 
 WORKDIR ${ES_HOME}
@@ -52,6 +52,7 @@ RUN chown elasticsearch:elasticsearch ${ES_HOME}/config/elasticsearch.yml \
     chmod 0750 ${ES_HOME}/bin/es-docker
 
 USER elasticsearch
-CMD ["/bin/bash", "${ES_HOME}/bin/es-docker"]
+ENV ES_COMMAND ${ES_HOME}/bin/es-docker
+CMD ["/bin/bash", ES_COMMAND]
 
 EXPOSE 9200 9300
