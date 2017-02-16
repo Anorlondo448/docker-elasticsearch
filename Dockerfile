@@ -3,9 +3,6 @@ MAINTAINER Anorlondo448 <@Anorlondo448>
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
-# Install xpack
-RUN elasticsearch-plugin install --batch x-pack
-
 # install icu
 RUN elasticsearch-plugin install analysis-icu
 
