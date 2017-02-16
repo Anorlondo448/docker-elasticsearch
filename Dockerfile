@@ -1,4 +1,4 @@
-FROM elasticsearch:latest
+FROM elasticsearch:5
 MAINTAINER Anorlondo448 <@Anorlondo448>
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
